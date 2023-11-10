@@ -143,5 +143,5 @@ export class AppConfigComponent implements OnInit {
     applyScale() {
         document.documentElement.style.fontSize = this.scale + 'px';
     }
-    
+
 }
