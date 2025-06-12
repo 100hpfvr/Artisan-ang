@@ -36,8 +36,8 @@ export class CreateTaskComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit(): void {
-        this.memberService.getMembers().then(members => this.members = members);
+    async ngOnInit(): Promise<void> {
+        this.members = await this.memberService.getMembers();
         this.resetTask();
     }
 

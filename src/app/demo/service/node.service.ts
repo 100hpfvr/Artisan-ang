@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 import { TreeNode } from 'primeng/api';
 
@@ -10,27 +11,27 @@ export class NodeService {
 
 	constructor(private http: HttpClient) { }
 
-	getFiles() {
-		return this.http.get<any>('assets/demo/data/files.json')
-			.toPromise()
-			.then(res => res.data as TreeNode[]);
-	}
+        getFiles() {
+                return firstValueFrom(
+                        this.http.get<any>('assets/demo/data/files.json')
+                ).then(res => res.data as TreeNode[]);
+        }
 
-	getLazyFiles() {
-		return this.http.get<any>('assets/demo/data/files-lazy.json')
-			.toPromise()
-			.then(res => res.data as TreeNode[]);
-	}
+        getLazyFiles() {
+                return firstValueFrom(
+                        this.http.get<any>('assets/demo/data/files-lazy.json')
+                ).then(res => res.data as TreeNode[]);
+        }
 
-	getFilesystem() {
-		return this.http.get<any>('assets/demo/data/filesystem.json')
-			.toPromise()
-			.then(res => res.data as TreeNode[]);
-	}
+        getFilesystem() {
+                return firstValueFrom(
+                        this.http.get<any>('assets/demo/data/filesystem.json')
+                ).then(res => res.data as TreeNode[]);
+        }
 
-	getLazyFilesystem() {
-		return this.http.get<any>('assets/demo/data/filesystem-lazy.json')
-			.toPromise()
-			.then(res => res.data as TreeNode[]);
-	}
+        getLazyFilesystem() {
+                return firstValueFrom(
+                        this.http.get<any>('assets/demo/data/filesystem-lazy.json')
+                ).then(res => res.data as TreeNode[]);
+        }
 }

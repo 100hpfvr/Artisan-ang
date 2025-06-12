@@ -22,17 +22,16 @@ export class TreeDemoComponent implements OnInit {
 
   constructor(private nodeService: NodeService) {}
 
-  ngOnInit() {
-    this.nodeService.getFiles().then((files) => (this.files1 = files));
-    this.nodeService.getFilesystem().then((files) => (this.files2 = files));
-    this.nodeService.getFiles().then((files) => {
-      this.files3 = [
-        {
-          label: 'Root',
-          children: files,
-        },
-      ];
-    });
+  async ngOnInit() {
+    this.files1 = await this.nodeService.getFiles();
+    this.files2 = await this.nodeService.getFilesystem();
+    const files = await this.nodeService.getFiles();
+    this.files3 = [
+      {
+        label: 'Root',
+        children: files,
+      },
+    ];
 
     this.cols = [
       { field: 'name', header: 'Name' },

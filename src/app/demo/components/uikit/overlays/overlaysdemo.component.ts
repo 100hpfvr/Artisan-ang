@@ -29,8 +29,8 @@ export class OverlaysDemoComponent implements OnInit {
 
     constructor(private productService: ProductService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
 
-    ngOnInit() {
-        this.productService.getProductsSmall().then(products => this.products = products);
+    async ngOnInit() {
+        this.products = await this.productService.getProductsSmall();
 
         this.images = [];
         this.images.push({

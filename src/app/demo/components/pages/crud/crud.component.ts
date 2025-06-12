@@ -32,8 +32,8 @@ export class CrudComponent implements OnInit {
 
     constructor(private productService: ProductService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
-    ngOnInit() {
-        this.productService.getProducts().then(data => this.products = data);
+    async ngOnInit() {
+        this.products = await this.productService.getProducts();
 
         this.cols = [
             { field: 'product', header: 'Product' },

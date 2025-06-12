@@ -36,7 +36,7 @@ export class EcommerceDashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.weeks = [{
             label: 'Last Week', 
             value: 0,
@@ -50,7 +50,7 @@ export class EcommerceDashboardComponent implements OnInit, OnDestroy {
 
         this.selectedWeek = this.weeks[0];
         this.initCharts();
-        this.productService.getProductsSmall().then(data => this.products = data);
+        this.products = await this.productService.getProductsSmall();
 
         this.cols = [
             {header: 'Name', field: 'name'},

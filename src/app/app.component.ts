@@ -7,6 +7,8 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class AppComponent implements OnInit {
 
+    title = 'Artisan';
+
     constructor(private primengConfig: PrimeNGConfig) { }
 
     ngOnInit(): void {
