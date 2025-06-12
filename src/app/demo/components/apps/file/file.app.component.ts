@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Folder } from 'src/app/demo/api/folder';
 import { File } from 'src/app/demo/api/file';
 import { Metric } from 'src/app/demo/api/metric';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
     templateUrl: './file.app.component.html',
     styleUrls: ['./file.app.component.scss']
 })
-export class FileAppComponent implements OnInit {
+export class FileAppComponent implements OnInit, OnDestroy {
 
     fileChart: any;
 
@@ -111,5 +111,11 @@ export class FileAppComponent implements OnInit {
                 }
             }
         };
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
