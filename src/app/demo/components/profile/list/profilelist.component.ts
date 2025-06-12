@@ -13,8 +13,8 @@ export class ProfileListComponent implements OnInit {
 
     constructor(private customerService: CustomerService, private router: Router) { }
 
-    ngOnInit() {
-        this.customerService.getCustomersLarge().then(customers => this.customers = customers);
+    async ngOnInit() {
+        this.customers = await this.customerService.getCustomersLarge();
     }
 
     onGlobalFilter(table: Table, event: Event) {

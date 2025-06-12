@@ -35,14 +35,13 @@ export class CalendarAppComponent implements OnInit {
 
     constructor(private eventService: EventService) { }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
         this.today = '2022-05-11';
 
-        this.eventService.getEvents().then(events => {
-            this.events = events;
-            this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
-            this.tags = this.events.map(item => item.tag);
-        });
+        const events = await this.eventService.getEvents();
+        this.events = events;
+        this.calendarOptions = { ...this.calendarOptions, ...{ events: events } };
+        this.tags = this.events.map(item => item.tag);
 
         this.calendarOptions = {
             plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],

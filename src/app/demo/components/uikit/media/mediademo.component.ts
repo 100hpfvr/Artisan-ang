@@ -51,14 +51,10 @@ export class MediaDemoComponent implements OnInit {
 
     constructor(private productService: ProductService, private photoService: PhotoService) { }
 
-    ngOnInit() {
-        this.productService.getProductsSmall().then(products => {
-            this.products = products;
-        });
+    async ngOnInit() {
+        this.products = await this.productService.getProductsSmall();
 
-        this.photoService.getImages().then(images => {
-            this.images = images;
-        });
+        this.images = await this.photoService.getImages();
     }
     
 }

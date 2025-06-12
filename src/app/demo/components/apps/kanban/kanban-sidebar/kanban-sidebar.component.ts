@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { KanbanCard, Comment, ListName, Task } from 'src/app/demo/api/kanban';
 import { Member } from 'src/app/demo/api/member';
 import { KanbanAppComponent } from '../kanban.app.component';
@@ -12,7 +12,7 @@ import { KanbanService } from '../service/kanban.service';
     templateUrl: './kanban-sidebar.component.html',
     styleUrls: ['./kanban-sidebar.component.scss']
 })
-export class KanbanSidebarComponent implements OnDestroy {
+export class KanbanSidebarComponent implements OnDestroy, OnInit {
 
     card: KanbanCard = {id:'' ,taskList: {title: 'Untitled Task List', tasks: []}};
 
@@ -51,7 +51,6 @@ export class KanbanSidebarComponent implements OnDestroy {
     @ViewChild('inputTaskListTitle') inputTaskListTitle!: ElementRef;
 
     constructor(public parent: KanbanAppComponent, private memberService: MemberService, private kanbanService: KanbanService) {
-        this.memberService.getMembers().then(members => this.assignees = members);
 
         this.cardSubscription = this.kanbanService.selectedCard$.subscribe(data => {
             this.card = data;
@@ -60,6 +59,10 @@ export class KanbanSidebarComponent implements OnDestroy {
         });
         this.listSubscription = this.kanbanService.selectedListId$.subscribe(data => this.listId = data);
         this.listNameSubscription = this.kanbanService.listNames$.subscribe(data => this.listNames = data);
+    }
+
+    async ngOnInit() {
+        this.assignees = await this.memberService.getMembers();
     }
 
     ngOnDestroy() {

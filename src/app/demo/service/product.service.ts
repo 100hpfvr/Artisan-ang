@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 import { Product } from 'src/app/demo/api/product';
 
@@ -11,36 +12,41 @@ export class ProductService {
     constructor(private http: HttpClient) { }
 
     getProductsSmall() {
-        return this.http.get<any>('assets/demo/data/products-small.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/products-small.json')
+        )
             .then(res => res.data as Product[])
             .then(data => data);
     }
 
     getProducts() {
-        return this.http.get<any>('assets/demo/data/products.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/products.json')
+        )
             .then(res => res.data as Product[])
             .then(data => data);
     }
 
     getProductsMixed() {
-        return this.http.get<any>('assets/demo/data/products-mixed.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/products-mixed.json')
+        )
             .then(res => res.data as Product[])
             .then(data => data);
     }
 
     getProductsWithOrdersSmall() {
-        return this.http.get<any>('assets/demo/data/products-orders-small.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/products-orders-small.json')
+        )
             .then(res => res.data as Product[])
             .then(data => data);
     }
 
     getProductsWithOrdersLarge() {
-        return this.http.get<any>('assets/demo/data/products-orders.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/products-orders.json')
+        )
             .then(res => res.data as Product[])
             .then(data => data);
     }

@@ -45,10 +45,8 @@ export class InputDemoComponent implements OnInit {
 
     constructor(private countryService: CountryService) { }
 
-    ngOnInit() {
-        this.countryService.getCountries().then(countries => {
-            this.countries = countries;
-        });
+    async ngOnInit() {
+        this.countries = await this.countryService.getCountries();
 
         this.cities = [
             { label: 'New York', value: { id: 1, name: 'New York', code: 'NY' } },

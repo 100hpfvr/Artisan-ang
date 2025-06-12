@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class EventService {
@@ -7,8 +8,9 @@ export class EventService {
     constructor(private http: HttpClient) { }
 
     getEvents() {
-        return this.http.get<any>('assets/demo/data/scheduleevents.json')
-            .toPromise()
+        return firstValueFrom(
+            this.http.get<any>('assets/demo/data/scheduleevents.json')
+        )
             .then(res => res.data as any[])
             .then(data => data);
     }
